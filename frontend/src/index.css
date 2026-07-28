@@ -1,0 +1,161 @@
+/* ============================================================
+   index.css — Global Styles
+   Tailwind CSS directives + custom utilities + dark mode base
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Styles ─────────────────────────────────────────── */
+@layer base {
+  /* Apply Inter font globally */
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  /* Dark mode base colors */
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  .dark body {
+    @apply bg-gray-950 text-gray-100;
+  }
+
+  /* Focus ring consistency */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+  }
+
+  /* Prevent text size adjustment on mobile */
+  * {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* ── Custom Scrollbar ────────────────────────────────────── */
+@layer utilities {
+  /* Thin scrollbar for webkit browsers */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: #4b5563 transparent;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+  .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+}
+
+/* ── Component Utilities ─────────────────────────────────── */
+@layer components {
+  /* Card base style — used across the app */
+  .card {
+    @apply bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800;
+  }
+
+  /* Form input base */
+  .input-base {
+    @apply w-full px-3 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700
+           bg-white dark:bg-gray-800 text-gray-900 dark:text-white
+           placeholder-gray-400 dark:placeholder-gray-500
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+           transition-colors;
+  }
+
+  /* Button base */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium
+           text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+           disabled:opacity-60 disabled:cursor-not-allowed shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium
+           text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800
+           border border-gray-200 dark:border-gray-700 rounded-xl
+           hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors
+           focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium
+           text-white bg-red-600 hover:bg-red-700 rounded-xl transition-colors
+           focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+           disabled:opacity-60 disabled:cursor-not-allowed shadow-sm;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-medium rounded-full;
+  }
+}
+
+/* ── Page transition ─────────────────────────────────────── */
+.page-transition {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* ── Chart.js canvas responsive fix ──────────────────────── */
+canvas {
+  max-width: 100%;
+}
+
+/* ── React Router scroll restoration ────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Selection color ─────────────────────────────────────── */
+::selection {
+  background-color: #bfdbfe;
+  color: #1e40af;
+}
+
+.dark ::selection {
+  background-color: #1d4ed8;
+  color: #eff6ff;
+}
+
+/* ── Print styles ────────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; }
+}
